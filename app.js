@@ -1,9 +1,10 @@
-const cats = document.querySelectorAll('img');
+const catImages = document.querySelectorAll('img');
 const scores = document.querySelectorAll('.score');
-const button = document.querySelector('button');
+const buttons = document.querySelectorAll('button');
 const counter = 0;
 
-cats.forEach(function(cat, index) {
+//Add an event listener to each cat's image
+catImages.forEach(function(cat, index) {
   cat.addEventListener('click', (function(copyOfCounter, copyOfIndex) {
     return function() {
       copyOfCounter++;
@@ -12,20 +13,9 @@ cats.forEach(function(cat, index) {
   }(counter, index)));
 });
 
-/* cats[0].addEventListener('click', (function(copyOfCounter) {
-  return function() {
-    copyOfCounter++;
-    scores[0].textContent = copyOfCounter;
-  }
-}(counter)));
-
-cats[1].addEventListener('click', (function(copyOfCounter) {
-  return function() {
-    copyOfCounter++;
-    scores[1].textContent = copyOfCounter;
-  }
-}(counter))); */
-
-button.addEventListener('click', function() {
-  window.location.reload();
+//Add an event listener to each button
+buttons.forEach(function(button) {
+  button.addEventListener('click', function() {
+    window.location.reload();
+  });
 });
