@@ -9,19 +9,18 @@
 </head>
 <body>
   <div class="container">
-  <div class="cat">
-    <h1>Amber</h1>
-    <h2>Your Highscore: <span class="score">0</span> clicks!</h2>
-    <button type="button" name="button">Reset!</button>
-    <img src="img/cat1.jpg" alt="">
   </div>
-  <div class="cat">
-    <h1>Djego</h1>
-    <h2>Your Highscore: <span class="score">0</span> clicks!</h2>
-    <button type="button" name="button">Reset!</button>
-    <img src="img/cat2.jpg" alt="">
-  </div>
-  </div>
+
+  <script id="thumb-template" type="text/x-handlebars-template">
+    <div class="cat">
+      <h1>{{name}}</h1>
+      <h2>Your Highscore: <span class="score">0</span> clicks!</h2>
+      <button type="button" name="button">Reset!</button>
+      <img src="{{src}}" alt="Cat Image">
+    </div>
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
   <script src="app.js" charset="utf-8"></script>
 </body>
 </html>
