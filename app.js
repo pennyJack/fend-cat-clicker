@@ -1,14 +1,19 @@
-const kitten = document.querySelector('img');
-const score = document.querySelector('.score');
+const cats = document.getElementsByTagName('img');
+const scores = document.getElementsByClassName('score');
 const button = document.querySelector('button');
-let counter = 0;
+let counter1 = 0;
+let counter2 = 0;
 
-kitten.addEventListener('click', function() {
-  counter++;
-  score.textContent = counter;
+cats[0].addEventListener('click', function() {
+  counter1++;
+  scores[0].textContent = counter1;
 });
 
-button.addEventListener('click', function(event) {
-  console.log(event);
+cats[1].addEventListener('click', function() {
+  counter2++;
+  scores[1].textContent = counter2;
+});
+
+button.addEventListener('click', function() {
   window.location.reload();
 });
