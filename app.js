@@ -19,8 +19,9 @@ $(function() {
 
   const controller = {
     init: function() {
+      //Need to send the cats array to the view for initialization and rendering
       listView.init(model.cats);
-      detailsView.init();
+      detailsView.init(model.cats);
     }
 
   };
@@ -35,8 +36,9 @@ $(function() {
   };
 
   const detailsView = {
-    init: function() {
-      
+    init: function(cats) {
+      const imageContainer = document.querySelector('.imageContainer');
+      imageContainer.innerHTML = imageTemp(cats[0]);
     },
     render: function() {
 
