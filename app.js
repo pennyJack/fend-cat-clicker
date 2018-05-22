@@ -13,19 +13,35 @@ $(function() {
       {name: "Wesley", clickCount: 0,  thumbnailURL: "img/thumbs/thumb3.jpg", imageURL: "img/cat3.jpg" },
       {name: "Marabella", clickCount: 0,  thumbnailURL: "img/thumbs/thumb4.jpg", imageURL: "img/cat4.jpg" },
       {name: "Alexander", clickCount: 0,  thumbnailURL: "img/thumbs/thumb5.jpg", imageURL: "img/cat5.jpg" }
-    ];
+    ]
 
   };
 
   const controller = {
+    init: function() {
+      listView.init(model.cats);
+      detailsView.init();
+    }
 
   };
 
   const listView = {
-
+    init: function(cats) {
+      const thumbnailContainer = document.querySelector('.thumbnailContainer');
+      cats.forEach(function(cat) {
+        thumbnailContainer.innerHTML += thumbTemp(cat);
+      });
+    }
   };
 
   const detailsView = {
+    init: function() {
+      
+    },
+    render: function() {
 
+    }
   };
+
+  controller.init();
 });
