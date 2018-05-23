@@ -26,8 +26,10 @@ $(function() {
           this.currentCat = cat;
         }
       }
-      console.log(this.currentCat);
       detailsView.render(this.currentCat);
+    },
+    updateClickCount: function() {
+      this.currentCat.clickCount++;
     },
     init: function() {
       this.currentCat = model.cats[0];
@@ -59,10 +61,16 @@ $(function() {
   const detailsView = {
     init: function(currentCat) {
       this.imageContainer = document.querySelector('.imageContainer');
-      this.imageContainer.innerHTML = imageTemplate(currentCat);
+      this.render(currentCat);
     },
     render: function(currentCat) {
       this.imageContainer.innerHTML = imageTemplate(currentCat);
+      const catImage = document.querySelector('.catImage');
+      catImage.addEventListener('click', function() {
+        const score = document.querySelector('.score');
+        controller.updateClickCount();
+        score.innerHTML = currentCat.clickCount;
+      });
     }
   };
 
