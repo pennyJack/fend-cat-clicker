@@ -19,8 +19,15 @@ $(function() {
 
   const controller = {
     updateCatDetails: function(target) {
-      console.log(target);
-      detailsView.render();
+      const targetId = target.getAttribute("id");
+      //console.log(targetId);
+      for(let cat of model.cats) {
+        if(cat.name === targetId) {
+          this.currentCat = cat;
+        }
+      }
+      console.log(this.currentCat);
+      detailsView.render(this.currentCat);
     },
     init: function() {
       this.currentCat = model.cats[0];
@@ -51,11 +58,11 @@ $(function() {
 
   const detailsView = {
     init: function(currentCat) {
-      const imageContainer = document.querySelector('.imageContainer');
-      imageContainer.innerHTML = imageTemplate(currentCat);
+      this.imageContainer = document.querySelector('.imageContainer');
+      this.imageContainer.innerHTML = imageTemplate(currentCat);
     },
-    render: function(cats) {
-
+    render: function(currentCat) {
+      this.imageContainer.innerHTML = imageTemplate(currentCat);
     }
   };
 
