@@ -14,13 +14,17 @@ $(function() {
       {name: "Marabella", clickCount: 0,  thumbnailURL: "img/thumbs/thumb4.jpg", imageURL: "img/cat4.jpg" },
       {name: "Alexander", clickCount: 0,  thumbnailURL: "img/thumbs/thumb5.jpg", imageURL: "img/cat5.jpg" }
     ]
-
   };
 
   const controller = {
+    init: function() {
+      this.currentCat = model.cats[0];
+      //Initialization
+      listView.init(model.cats);
+      detailsView.init(this.currentCat);
+    },
     updateCatDetails: function(target) {
       const targetId = target.getAttribute("id");
-      //console.log(targetId);
       for(let cat of model.cats) {
         if(cat.name === targetId) {
           this.currentCat = cat;
@@ -30,14 +34,7 @@ $(function() {
     },
     updateClickCount: function() {
       this.currentCat.clickCount++;
-    },
-    init: function() {
-      this.currentCat = model.cats[0];
-      //Need to send the cats array to the view for initialization and rendering
-      listView.init(model.cats);
-      detailsView.init(this.currentCat);
     }
-
   };
 
   const listView = {
@@ -66,6 +63,7 @@ $(function() {
     render: function(currentCat) {
       this.imageContainer.innerHTML = imageTemplate(currentCat);
       const catImage = document.querySelector('.catImage');
+      //Add an new event listener each time the detailsView gets rendered
       catImage.addEventListener('click', function() {
         const score = document.querySelector('.score');
         controller.updateClickCount();
