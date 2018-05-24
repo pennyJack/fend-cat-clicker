@@ -7,6 +7,7 @@ $(function() {
 
   //Data model
   const model = {
+    currentCat: null,
     cats: [
       {name: "Amber", clickCount: 0,  thumbnailURL: "img/thumbs/thumb1.jpg", imageURL: "img/cat1.jpg" },
       {name: "Djego", clickCount: 0,  thumbnailURL: "img/thumbs/thumb2.jpg", imageURL: "img/cat2.jpg" },
@@ -18,22 +19,22 @@ $(function() {
 
   const controller = {
     init: function() {
-      this.currentCat = model.cats[0];
+      model.currentCat = model.cats[0];
       //Initialization
       listView.init(model.cats);
-      detailsView.init(this.currentCat);
+      detailsView.init(model.currentCat);
     },
     updateCatDetails: function(target) {
       const targetId = target.getAttribute("id");
       for(let cat of model.cats) {
         if(cat.name === targetId) {
-          this.currentCat = cat;
+          model.currentCat = cat;
         }
       }
-      detailsView.render(this.currentCat);
+      detailsView.render(model.currentCat);
     },
     updateClickCount: function() {
-      this.currentCat.clickCount++;
+      model.currentCat.clickCount++;
     }
   };
 
