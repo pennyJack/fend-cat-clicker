@@ -10,24 +10,14 @@
 <body>
   <h1>Pick one of those cute cats and show'em your love by clicking them!</h1>
   <div class="thumbnailContainer">
+    <div class="cat">
+    </div>
   </div>
   <div class="imageContainer">
+      <h2 id="catName"></h2>
+      <h3>Your Highscore: <span id="score">0</span> clicks!</h3>
+      <img src="" alt="Cat Image" id="catImage">
   </div>
-
-  <script id="thumb-template" type="text/x-handlebars-template">
-    <div class="cat">
-      <h2>{{name}}</h2>
-      <img src="{{thumbnailURL}}" alt="Cat Thumbnail" class="catThumbnail" id="{{name}}">
-    </div>
-  </script>
-
-  <script id="image-template" type="text/x-handlebars-template">
-    <div class="cat">
-      <h2>{{name}}</h2>
-      <h3>Your Highscore: <span class="score">{{clickCount}}</span> clicks!</h3>
-      <img src="{{imageURL}}" alt="Cat Image" class="catImage">
-    </div>
-  </script>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
