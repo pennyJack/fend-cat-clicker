@@ -1,9 +1,4 @@
 $(function() {
-  //handlebarsjs variables
-  const thumbSrc = document.getElementById("thumb-template").innerHTML;
-  const imageSrc = document.getElementById("image-template").innerHTML;
-  const thumbTemplate = Handlebars.compile(thumbSrc);
-  const imageTemplate = Handlebars.compile(imageSrc);
 
   //Data model
   const model = {
@@ -21,8 +16,11 @@ $(function() {
     init: function() {
       model.currentCat = model.cats[0];
       //Initialization
-      listView.init(model.cats);
+      listView.init();
       detailsView.init(model.currentCat);
+    },
+    getCats: function() {
+      return model.cats;
     },
     updateCatDetails: function(target) {
       const targetId = target.getAttribute("id");
@@ -39,27 +37,57 @@ $(function() {
   };
 
   const listView = {
-    init: function(cats) {
-      const thumbnailContainer = document.querySelector('.thumbnailContainer');
-      let catThumbnails;
+    init: function() {
+      this.thumbnailContainer = document.querySelector('.thumbnailContainer');
+      this.render();
+    },
+    render: function() {
+      let i, cat, cardListItem, h2, img;
+
+      let cats = controller.getCats();
+
       //Render cat thumbnails
-      cats.forEach(function(cat) {
-        thumbnailContainer.innerHTML += thumbTemplate(cat);
-      });
-      //Select rendered thumbnails and add event listeners
-      catThumbnails = document.querySelectorAll('.catThumbnail');
-      catThumbnails.forEach(function(catThumbnail) {
-        catThumbnail.addEventListener('click', function(evt) {
-          controller.updateCatDetails(evt.target);
-        });
-      });
+      for(i = 0; i <= cats.length; i++) {
+        cat = cats[i];
+
+        catListItem = document.createElement('div');
+        catListItem.setAttribute('class', 'cat');
+
+        h2 = document.createElement('h2');
+        h2.textContent = cat.name;
+        catListItem.append(h2);
+
+        img = document.createElement('img');
+        img.src = cat.thumbnailURL;
+        img.alt = "Cat Image";
+        catListItem.append(img);
+
+        //addEventListener (use closure to reference right cat)
+        img.addEventListener('click', (function(copyOfCat) {
+          return function() {
+            controller.setCurrentCat(copyOfCat);
+            detailsView.render();
+          }
+        }(cat));
+
+        this.thumbnailContainer.append(catListItem);
+      }
     }
   };
 
   const detailsView = {
     init: function(currentCat) {
       this.imageContainer = document.querySelector('.imageContainer');
-      this.render(currentCat);
+      this.render();
+    },
+    render: function(currentCat) {
+    }
+  };
+
+  /*const detailsView = {
+    init: function(currentCat) {
+      this.imageContainer = document.querySelector('.imageContainer');
+      this.render();
     },
     render: function(currentCat) {
       this.imageContainer.innerHTML = imageTemplate(currentCat);
@@ -71,7 +99,7 @@ $(function() {
         score.innerHTML = currentCat.clickCount;
       });
     }
-  };
+  };*/
 
   controller.init();
 });
