@@ -2,6 +2,7 @@
 //Data model
 const model = {
   currentCat: null,
+  adminAreaIsVisible: false,
   cats: [
     {name: "Amber", clickCount: 0,  thumbnailURL: "img/thumbs/thumb1.jpg", imageURL: "img/cat1.jpg" },
     {name: "Djego", clickCount: 0,  thumbnailURL: "img/thumbs/thumb2.jpg", imageURL: "img/cat2.jpg" },
@@ -18,6 +19,7 @@ const controller = {
     //Initialization
     listView.init();
     detailsView.init();
+    adminView.init();
   },
   getCats: function() {
     return model.cats;
@@ -31,6 +33,14 @@ const controller = {
   updateClickCount: function() {
     model.currentCat.clickCount++;
     detailsView.render();
+  },
+  toggleAdminView: function() {
+    if(model.adminAreaIsVisible === false) {
+      model.adminAreaIsVisible = true;
+    } else {
+      model.adminAreaIsVisible = false;
+    }
+    adminView.render();
   }
 };
 
@@ -94,5 +104,19 @@ const detailsView = {
     this.score.textContent = cat.clickCount.toString();
   }
 };
+
+const adminView = {
+  init: function() {
+    this.adminBtn = document.getElementById('adminBtn');
+    this.adminForm = document.getElementById('adminForm');
+
+    this.adminBtn.addEventListener('click', function() {
+      controller.toggleAdminView();
+    });
+  },
+  render: function() {
+    this.adminForm.classList.toggle('invisible');
+  }
+}
 
 controller.init();
