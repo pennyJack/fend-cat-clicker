@@ -41,6 +41,12 @@ const controller = {
       model.adminAreaIsVisible = false;
     }
     adminView.render();
+  },
+  updateModel: function() {
+    model.currentCat.name = adminView.getName.value ? adminView.getName.value : model.currentCat.name;
+    model.currentCat.imageURL = adminView.getImageURL.value ? adminView.getImageURL.value : model.currentCat.imageURL;
+    model.currentCat.clickCount = adminView.getClickCount.value ? adminView.getClickCount.value : model.currentCat.clickCount;
+    detailsView.render();
   }
 };
 
@@ -109,9 +115,20 @@ const adminView = {
   init: function() {
     this.adminBtn = document.getElementById('adminBtn');
     this.adminForm = document.getElementById('adminForm');
+    this.getName = document.getElementById('getName');
+    this.getImageURL = document.getElementById('getImageURL');
+    this.getClickCount = document.getElementById('getClickCount');
+    this.saveBtn = document.getElementById('saveBtn');
+    this.cancelBtn = document.getElementById('cancelBtn');
 
+    //Toggle visibility of form on click on Admin button
     this.adminBtn.addEventListener('click', function() {
       controller.toggleAdminView();
+    });
+
+    //Update model with values of input fields (if any) and render view again
+    this.saveBtn.addEventListener('click', function() {
+      controller.updateModel();
     });
   },
   render: function() {
