@@ -2,7 +2,7 @@
 //Data model
 const model = {
   currentCat: null,
-  adminAreaIsVisible: false,
+  //adminAreaIsVisible: false,
   cats: [
     {name: "Amber", clickCount: 0,  thumbnailURL: "img/thumbs/thumb1.jpg", imageURL: "img/cat1.jpg" },
     {name: "Djego", clickCount: 0,  thumbnailURL: "img/thumbs/thumb2.jpg", imageURL: "img/cat2.jpg" },
@@ -35,11 +35,12 @@ const controller = {
     detailsView.render();
   },
   toggleAdminView: function() {
-    if(model.adminAreaIsVisible === false) {
+    //not needed due to .toggle() function
+    /* if(model.adminAreaIsVisible === false) {
       model.adminAreaIsVisible = true;
     } else {
       model.adminAreaIsVisible = false;
-    }
+    } */
     adminView.render();
   },
   updateModel: function() {
@@ -124,6 +125,12 @@ const adminView = {
     //Toggle visibility of form on click on Admin button
     this.adminBtn.addEventListener('click', function() {
       controller.toggleAdminView();
+    });
+
+    //Refresh page on click on Cancel button
+    this.cancelBtn.addEventListener('click', function() {
+      window.location.reload();
+      //controller.toggleAdminView();
     });
 
     //Update model with values of input fields (if any) and render view again
